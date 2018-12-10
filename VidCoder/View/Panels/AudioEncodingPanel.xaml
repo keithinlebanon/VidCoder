@@ -243,17 +243,48 @@
 								                    ConverterParameter={x:Static model:AudioEncodeRateType.Bitrate}}" />
 						</Grid>
 
-						<ComboBox
+						<StackPanel
 							Grid.Row="0"
 							Grid.Column="1"
-							MinWidth="45"
-							AutomationProperties.LabeledBy="{Binding ElementName=bitrateLabel}"
-							ItemContainerStyle="{StaticResource GrayNonCompatible}"
-							ItemsSource="{Binding BitrateChoices}"
-							SelectedValue="{Binding SelectedBitrate}"
-							Style="{StaticResource AudioComboBox}"
+							Orientation="Horizontal"
 							Visibility="{Binding BitrateVisible,
-							                     Converter={StaticResource VisibilityConverter}}" />
+							                     Converter={StaticResource VisibilityConverter}}">
+							<ComboBox
+								MinWidth="45"
+								AutomationProperties.LabeledBy="{Binding ElementName=bitrateLabel}"
+								ItemContainerStyle="{StaticResource GrayNonCompatible}"
+								ItemsSource="{Binding BitrateChoices}"
+								SelectedValue="{Binding SelectedBitrate}"
+								Style="{StaticResource AudioComboBox}"
+								Visibility="{Binding BitrateMode,
+								                     Converter={StaticResource EnumVisibilityConverter},
+								                     ConverterParameter={x:Static model:AudioBitrateMode.Total}}" />
+
+							<controls:NumberBox
+								MinWidth="40"
+								AllowEmpty="False"
+								Minimum="16"
+								Number="{Binding PerChannelBitrate,
+								                 Mode=TwoWay}"
+								ShowIncrementButtons="False"
+								Visibility="{Binding BitrateMode,
+								                     Converter={StaticResource EnumVisibilityConverter},
+								                     ConverterParameter={x:Static model:AudioBitrateMode.PerChannel}}" />
+
+							<TextBlock
+								Margin="10 0 0 0"
+								VerticalAlignment="Center"
+								Text="{x:Static res:EncodingRes.BitrateModeLabel}" />
+
+							<ComboBox
+								MinWidth="80"
+								Margin="6 0 0 0"
+								ItemsSource="{Binding BitrateModeChoices}"
+								SelectedValue="{Binding BitrateMode}"
+								SelectedValuePath="Value"
+								Style="{StaticResource AudioComboBox}" />
+						</StackPanel>
+
 
 						<!--  Audio quality  -->
 						<Grid

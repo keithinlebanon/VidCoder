@@ -1176,4 +1176,12 @@ Lapsharp sharpens using convolution kernels approximating Laplacian edge filters
   <data name="ApplyToQueueButton" xml:space="preserve">
     <value>Apply to queue</value>
   </data>
+  <data name="DefaultCaption" xml:space="preserve">
+    <value>(default)</value>
+    <comment>Placeholder for number box to use default value</comment>
+  </data>
+  <data name="BitrateModeLabel" xml:space="preserve">
+    <value>Bitrate mode:</value>
+    <comment>Label for the control to have the audio bitrate target per-channel or total bitrate.</comment>
+  </data>
 </root>

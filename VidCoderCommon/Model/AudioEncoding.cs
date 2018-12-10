@@ -34,9 +34,19 @@ namespace VidCoderCommon.Model
 		public AudioEncodeRateType EncodeRateType { get; set; }
 
 		/// <summary>
+		/// Gets or sets the scope that the bitrate is targeting.
+		/// </summary>
+		public AudioBitrateMode BitrateMode { get; set; }
+
+		/// <summary>
 		/// Gets or sets the bitrate (in kbps) of this track.
 		/// </summary>
 		public int Bitrate { get; set; }
+
+		/// <summary>
+		/// Gets or sets the bitrate (in kbps) to set per channel.
+		/// </summary>
+		public int PerChannelBitrate { get; set; }
 
 		/// <summary>
 		/// Gets or sets the target audio quality for this track.

@@ -664,6 +664,15 @@ namespace VidCoder.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitrate mode:.
+        /// </summary>
+        public static string BitrateModeLabel {
+            get {
+                return ResourceManager.GetString("BitrateModeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bottom.
         /// </summary>
         public static string Bottom {
@@ -867,6 +876,15 @@ namespace VidCoder.Resources {
         public static string DecombLabel {
             get {
                 return ResourceManager.GetString("DecombLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (default).
+        /// </summary>
+        public static string DefaultCaption {
+            get {
+                return ResourceManager.GetString("DefaultCaption", resourceCulture);
             }
         }
         

@@ -268,4 +268,12 @@
   <data name="EncodeCompleteActionType_StopEncoding" xml:space="preserve">
     <value>Stop encoding</value>
   </data>
+  <data name="AudioBitrateMode_PerChannel" xml:space="preserve">
+    <value>Per channel</value>
+    <comment>The option for targeting the per-channel bitrate for an audio stream</comment>
+  </data>
+  <data name="AudioBitrateMode_Total" xml:space="preserve">
+    <value>Total</value>
+    <comment>The option for setting the entire audio stream's bitrate</comment>
+  </data>
 </root>

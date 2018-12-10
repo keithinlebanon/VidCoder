@@ -42,12 +42,7 @@ namespace VidCoder.ViewModel
 		private AudioEncoderViewModel selectedAudioEncoder;
 		private List<MixdownViewModel> mixdownChoices;
 		private MixdownViewModel selectedMixdown;
-		private int sampleRate;
 		private List<BitrateChoiceViewModel> bitrateChoices;
-		private BitrateChoiceViewModel selectedBitrate;
-		private int gain;
-		private double drc;
-		private string name;
 
 		private static List<int> allSampleRateChoices;
 
@@ -144,11 +139,15 @@ namespace VidCoder.ViewModel
 				this.audioCompression = this.HBAudioEncoder.DefaultCompression;
 			}
 
+			this.bitrateMode = audioEncoding.BitrateMode;
+
 			this.selectedBitrate = this.BitrateChoices.SingleOrDefault(b => b.Bitrate == audioEncoding.Bitrate);
 			if (this.selectedBitrate == null)
 			{
 				this.selectedBitrate = this.BitrateChoices.First();
 			}
+
+			this.perChannelBitrate = audioEncoding.PerChannelBitrate;
 
 			this.gain = audioEncoding.Gain;
 			this.drc = audioEncoding.Drc;
@@ -428,7 +427,15 @@ namespace VidCoder.ViewModel
 					newAudioEncoding.EncodeRateType = this.EncodeRateType;
 					if (this.EncodeRateType == AudioEncodeRateType.Bitrate)
 					{
-						newAudioEncoding.Bitrate = this.SelectedBitrate.Bitrate;
+						newAudioEncoding.BitrateMode = this.BitrateMode;
+						if (this.BitrateMode == AudioBitrateMode.Total)
+						{
+							newAudioEncoding.Bitrate = this.SelectedBitrate.Bitrate;
+						}
+						else
+						{
+							newAudioEncoding.PerChannelBitrate = this.PerChannelBitrate;
+						}
 					}
 					else if (this.EncodeRateType == AudioEncodeRateType.Quality)
 					{
@@ -731,6 +738,8 @@ namespace VidCoder.ViewModel
 			}
 		}
 
+		private int sampleRate;
+
 		/// <summary>
 		/// Gets or sets the sample rate in Hz for this audio encoding.
 		/// </summary>
@@ -762,6 +771,7 @@ namespace VidCoder.ViewModel
 			}
 		}
 
+		private BitrateChoiceViewModel selectedBitrate;
 		public BitrateChoiceViewModel SelectedBitrate
 		{
 			get
@@ -781,6 +791,43 @@ namespace VidCoder.ViewModel
 			}
 		}
 
+		public List<ComboChoice<AudioBitrateMode>> BitrateModeChoices { get; } = new List<ComboChoice<AudioBitrateMode>>
+		{
+			new ComboChoice<AudioBitrateMode>(AudioBitrateMode.Total, EnumsRes.AudioBitrateMode_Total),
+			new ComboChoice<AudioBitrateMode>(AudioBitrateMode.PerChannel, EnumsRes.AudioBitrateMode_PerChannel),
+		};
+
+		private AudioBitrateMode bitrateMode;
+		public AudioBitrateMode BitrateMode
+		{
+			get
+			{
+				return this.bitrateMode;
+			}
+
+			set
+			{
+				this.bitrateMode = value;
+				this.RaiseAudioPropertyChanged();
+			}
+		}
+
+		private int perChannelBitrate;
+		public int PerChannelBitrate
+		{
+			get
+			{
+				return this.perChannelBitrate;
+			}
+
+			set
+			{
+				this.perChannelBitrate = value;
+				this.RaiseAudioPropertyChanged();
+			}
+		}
+
+		private int gain;
 		public int Gain
 		{
 			get
@@ -795,6 +842,7 @@ namespace VidCoder.ViewModel
 			}
 		}
 
+		private double drc;
 		public double Drc
 		{
 			get
@@ -865,6 +913,7 @@ namespace VidCoder.ViewModel
 		private ObservableAsPropertyHelper<bool> passthroughIfPossibleVisible;
 		public bool PassthroughIfPossibleVisible => this.passthroughIfPossibleVisible.Value;
 
+		private string name;
 		public string Name
 		{
 			get

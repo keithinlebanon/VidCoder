@@ -124,6 +124,24 @@ namespace VidCoder.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Per channel.
+        /// </summary>
+        public static string AudioBitrateMode_PerChannel {
+            get {
+                return ResourceManager.GetString("AudioBitrateMode_PerChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string AudioBitrateMode_Total {
+            get {
+                return ResourceManager.GetString("AudioBitrateMode_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fast.
         /// </summary>
         public static string CombDetect_fast {
